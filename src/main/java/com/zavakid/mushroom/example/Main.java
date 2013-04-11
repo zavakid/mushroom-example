@@ -29,6 +29,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         DefaultMetricsSystem.initialize("test");
+        DefaultMetricsSystem.INSTANCE.register("echo sink", "echo sink print to stdout", new EchoMetricsSink());
         App app = new App();
         concurrentRun(app);
         Thread.sleep(Long.MAX_VALUE);
