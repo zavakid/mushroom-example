@@ -18,7 +18,7 @@
     <dependency>
       <groupId>com.zavakid</groupId>
       <artifactId>mushroom</artifactId>
-      <version>0.2</version>
+      <version>0.4</version>
     </dependency>
 
     <dependency>

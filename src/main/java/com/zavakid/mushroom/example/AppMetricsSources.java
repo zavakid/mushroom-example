@@ -16,6 +16,7 @@ package com.zavakid.mushroom.example;
 import com.zavakid.mushroom.DefaultMetricsSystem;
 import com.zavakid.mushroom.lib.AbstractMetricsSource;
 import com.zavakid.mushroom.lib.MetricMutableCounterLong;
+import com.zavakid.mushroom.lib.MetricMutableDeltaLong;
 import com.zavakid.mushroom.lib.MetricMutableGaugeInt;
 import com.zavakid.mushroom.lib.MetricMutableStat;
 
@@ -28,6 +29,7 @@ public class AppMetricsSources extends AbstractMetricsSource {
     final MetricMutableCounterLong appCalledCounter;
     final MetricMutableGaugeInt    appLoad;
     final MetricMutableStat        appCalledStat;
+    final MetricMutableDeltaLong   appCalledDelta;
 
     public static AppMetricsSources create() {
         AppMetricsSources result = new AppMetricsSources("app");
@@ -40,10 +42,13 @@ public class AppMetricsSources extends AbstractMetricsSource {
         appCalledCounter = registry().newCounter("appCalled", "count the app called times", 0L);
         appLoad = registry().newGauge("appLoad", "the app load", 0);
         appCalledStat = registry().newStat("appCalledStat", "app called stat", "call method", "time");
+        appCalledDelta = registry().newDelta("appCalledDelta", "app called delta", 0L);
+
     }
 
     public void addCalledTime() {
         appCalledCounter.incr();
+        appCalledDelta.incr();
     }
 
     public void setAppLoad(int load) {
